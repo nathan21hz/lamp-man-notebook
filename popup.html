@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>路灯Man笔记本</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style>
+	body {
+		font-family: 'Microsoft Yahei';
+		width: 300px;
+		min-height: 40px;
+	}
+	a {margin-right: 10px;}
+	</style>
+</head>
+<body>
+	<link href="css/index.css" rel="stylesheet">
+	<div id="app" v-loading.fullscreen.lock="loading">
+		<el-row v-if="status==0" style="text-align: center;">
+			<el-col :span="24"><div>
+				<el-button type="primary" @click="startRecord">开始记录本直播间</el-button>
+			</div></el-col>
+		</el-row>
+		<el-row v-if="status==1" style="text-align: center;">
+			<div>
+				房间：{{data.title}}<br>开播时间：{{data.live_time}}
+			</div>
+				<el-input v-model="input" placeholder="内容" @keyup.enter.native="addRecordItem"></el-input>
+				（回车以记录）
+		</el-row>
+		<el-row v-if="status==2" style="text-align: center;">
+			保存有上次直播的记录，请导出<br>
+			清除上次记录后才可进行新一次记录
+		</el-row>
+		<el-row v-if="status==1 || status==2" style="text-align: center;">
+			<el-table :data="data.list"	stripe style="width: 100%"
+				:row-style="{height:'40px'}"
+				:cell-style="{padding:'0px'}">
+				<el-table-column
+					prop="time"
+					label="时间"
+					width="80">
+				</el-table-column>
+				<el-table-column
+					prop="desc"
+					label="内容">
+				</el-table-column>
+				<el-table-column label="操作" width="70">
+					<template slot-scope="scope">
+						<el-button type="danger" size="mini" @click="delRecordItem(scope.$index)" plain round>删除</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+		</el-row>
+		<el-row v-if="status==2" style="text-align: center;">
+			
+		</el-row>
+		<el-row v-if="status==1 || status==2" style="text-align: center;" >
+			<br>
+			<el-button type="primary" @click="exportData" size="small">导出记录</el-button>
+			<el-button type="danger" @click="clearRecord" size="small">清除本次记录</el-button>
+		</el-row>
+
+	</div>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/vue-resource.min.js"></script>
+	<script type="text/javascript" src="js/element-ui.js"></script>
+	<script type="text/javascript" src="js/vue-clipboard.min.js"></script>
+	<script type="text/javascript" src="js/popup.js"></script>
+</body>
+</html>

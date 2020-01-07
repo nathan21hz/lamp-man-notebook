@@ -42,7 +42,8 @@ var app = new Vue({
 					that.data = items[room_id.toString()]
 					that.$http.get("https://api.live.bilibili.com/room/v1/Room/get_info?from=room&room_id="+room_id.toString()).then(
 					function(response){
-						if(response.data.data.room_id==that.data.room_id && response.data.data.live_time==that.data.live_time){
+						if((response.data.data.room_id==that.data.room_id || response.data.data.short_id == that.data.room_id)
+							&& response.data.data.live_time==that.data.live_time){
 							//本次直播记录中
 							console.log("本次直播记录中")
 							that.status = 1
@@ -68,7 +69,11 @@ var app = new Vue({
 					function(response){
 						if( response.data.data.live_status == 1){
 							that.data.uid = response.data.data.uid
-							that.data.room_id = response.data.data.room_id
+							if(response.data.data.short_id != 0){
+								that.data.room_id = response.data.data.short_id
+							}else{
+								that.data.room_id = response.data.data.room_id
+							}
 							that.data.title = response.data.data.title
 							that.data.live_time = response.data.data.live_time
 							that.data.list = []

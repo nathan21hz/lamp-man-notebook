@@ -1,43 +1,36 @@
 {
-	// 清单文件的版本，这个必须写，而且必须是2
 	"manifest_version": 2,
-	// 插件的名称
 	"name": "路灯Man笔记本",
-	// 插件的版本
-	"version": "0.9.0",
-	// 插件描述
-	"description": "-",
-	// 图标，一般偷懒全部用一个尺寸的也没问题
+	"version": "1.0.0",
+	"description": "路灯Man用于记录直播内容的Chrome插件",
 	"icons":
 	{
 		"16": "img/icon.png",
 		"48": "img/icon.png",
 		"128": "img/icon.png"
 	},
-	// 会一直常驻的后台JS或后台页面
 	"background": 
 	{
 		"scripts": ["js/background.js"],
 		"persistent": false
 	},
-	// 当某些特定页面打开才显示的图标
 	"page_action":
 	{
 		"default_icon": "img/icon.png",
 		"default_title": "路灯Man笔记本",
 		"default_popup": "popup.html"
 	},
-	// 权限申请
 	"permissions":
 	[
-		"tabs", // 标签
-		"notifications", // 通知
-		"storage", // 插件本地存储
+		"tabs", 
+		"notifications",
+		"storage", 
 		"declarativeContent",
-		"http://*/*",
-		"https://*/*" 
+		"https://live.bilibili.com/*",
+		"http://live.bilibili.com/*",
+		"http://api.live.bilibili.com/*",
+		"https://api.live.bilibili.com/*" 
 	],
-	// 插件主页，这个很重要，不要浪费了这个免费广告位
-	"homepage_url": "https://github.com/nathan21hz",
+	"homepage_url": "https://github.com/nathan21hz/lamp-man-notebook",
 	"content_security_policy": "style-src 'self' 'unsafe-inline';script-src 'self' 'unsafe-eval' https://cdn.bootcss.com; object-src 'self' ;"
 }

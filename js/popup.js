@@ -9,7 +9,7 @@ var app = new Vue({
 			live_time:"",
 			list:[]
 		},
-		status:0,
+		status:1,
 		input:""
 
     },
@@ -17,7 +17,9 @@ var app = new Vue({
     },
     mounted: function() {
 		this.getRoomid(this.getStorage)
-    },
+	},
+	updated: function() {
+	},
     methods:{
 		getRoomid(callback){
 			var that = this
@@ -47,8 +49,10 @@ var app = new Vue({
 							//本次直播记录中
 							console.log("本次直播记录中")
 							that.status = 1
-
+							
 							that.loading = false
+							console.log(that.$refs.loginput)
+							that.$refs.loginput.focus()
 						} else {
 							//上次记录的直播已经结束
 							console.log("上次记录的直播已经结束")
@@ -142,6 +146,7 @@ var app = new Vue({
 			}
 
 			this.$copyText(text).then(function (e) {
+				console.log(that.$refs.loginput)
 				that.$message({
 					message:'记录已拷贝到剪贴板',
 					offset:10,

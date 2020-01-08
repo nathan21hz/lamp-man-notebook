@@ -25,7 +25,7 @@
 			<div>
 				房间：{{data.title}}<br>开播时间：{{data.live_time}}
 			</div>
-				<el-input v-model="input" placeholder="内容" @keyup.enter.native="addRecordItem"></el-input>
+				<el-input ref="loginput" v-model="input" placeholder="内容" @keyup.enter.native="addRecordItem"></el-input>
 				（回车以记录）
 		</el-row>
 		<el-row v-if="status==2" style="text-align: center;">

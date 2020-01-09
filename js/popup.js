@@ -51,7 +51,6 @@ var app = new Vue({
 							that.status = 1
 							
 							that.loading = false
-							console.log(that.$refs.loginput)
 							that.$refs.loginput.focus()
 						} else {
 							//上次记录的直播已经结束

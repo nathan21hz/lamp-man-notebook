@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>路灯Man笔记本 - 配置</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style>
+	body {
+		font-family: 'Microsoft Yahei';
+		width: 800px;
+		min-height: 40px;
+	}
+	a {margin-right: 10px;}
+	</style>
+</head>
+<body>
+	<link href="css/index.css" rel="stylesheet">
+	<div id="app" style="text-align: center;">
+        <el-table :data="data_list"	stripe style="width: 100%"
+            :row-style="{height:'40px'}"
+            :cell-style="{padding:'0px'}">
+            <el-table-column
+                prop="room_id"
+                label="直播间id"
+                width="100">
+            </el-table-column>
+            <el-table-column
+                prop="title"
+                label="标题"
+                width="">
+            </el-table-column>
+            <el-table-column
+                prop="live_time"
+                label="开始时间"
+                width="170">
+            </el-table-column>
+            <el-table-column label="操作" width="150">
+                <template slot-scope="scope">
+                    <el-button type="primary" size="mini" @click="exportData(scope.row.room_id)" plain round>导出</el-button>
+                    <el-button type="danger" size="mini" @click="delRecord(scope.row.room_id)" plain round>删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table><br>
+        <el-button type="danger" @click="clearAll">清空所有记录</el-button>
+        <br><br>
+        <dev style="color: #C0C4CC;text-align: center; font-size: 12px">
+            路灯Man笔记本 <a style="text-decoration: none;color: #C0C4CC;" href="https://github.com/nathan21hz">By Nathan_21Hz</a><br><br>
+        </dev>
+	</div>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/vue-resource.min.js"></script>
+	<script type="text/javascript" src="js/element-ui.js"></script>
+	<script type="text/javascript" src="js/vue-clipboard.min.js"></script>
+	<script type="text/javascript" src="js/options.js"></script>
+</body>
+</html>

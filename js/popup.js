@@ -90,7 +90,8 @@ var app = new Vue({
 								message:'当前直播间未开播',
 								offset:6,
 								center:true,
-								duration:1000});
+								duration:1000,
+							});
 						}
 					},
 					function(response){
@@ -98,10 +99,31 @@ var app = new Vue({
 					})
 		},
 		clearRecord(){
-			var that = this
-			chrome.storage.sync.remove(that.data.room_id.toString())
-			that.status = 0
-			console.log("已删除本直播间记录")
+			this.$confirm('此操作将删除本次全部记录，是否继续？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+				type: 'warning',
+				customClass: 'confirm-message'
+            }).then(() => {
+                chrome.storage.sync.remove(this.data.room_id.toString())
+				this.status = 0
+				console.log("已删除本直播间记录")
+                this.$message({
+                    type: 'success',
+					message: '删除成功!',
+					offset:6,
+					center:true,
+					duration:1000
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+					message: '已取消删除',
+					offset:6,
+					center:true,
+					duration:1000
+                });          
+            });
 		},
 		saveRecord(){
 			var that = this
@@ -125,7 +147,7 @@ var app = new Vue({
 			//计算相差秒数
 			var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
 			var seconds=Math.round(leave3/1000)
-			var time = hours.toString()+":"+minutes.toString()+":"+seconds.toString()
+			var time = hours.toString()+":"+minutes.toString().padStart(2,'0')+":"+seconds.toString().padStart(2,'0')
 			this.data.list.push({time:time,desc:this.input})
 			console.log("添加一条记录")
 			this.saveRecord()
@@ -148,13 +170,13 @@ var app = new Vue({
 				console.log(that.$refs.loginput)
 				that.$message({
 					message:'记录已拷贝到剪贴板',
-					offset:10,
+					offset:6,
 					center:true,
 					duration:3000});
 			  }, function (e) {
 				that.$message({
 					message:'拷贝到剪贴板错误',
-					offset:10,
+					offset:6,
 					center:true,
 					duration:1000});
 			})
